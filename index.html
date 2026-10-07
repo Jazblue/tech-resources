@@ -14,6 +14,8 @@
         .resource-card a:hover { background: #2980b9; }
         .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; font-size: 0.9em; color: #7f8c8d; }
         .logo { text-align: center; margin: 20px 0; }
+        .visitor-counter { text-align: right; margin-top: 10px; font-size: 0.85em; color: #7f8c8d; }
+        .visitor-counter span { font-weight: bold; color: #3498db; }
     </style>
 </head>
 <body>
@@ -40,9 +42,30 @@
         <a href="https://jazblue.github.io/powershell-help/" target="_blank">View Resource →</a>
     </div>
     
+    <div class="visitor-counter">
+        Visits: <span id="visit-count">Loading...</span>
+    </div>
+    
     <div class="footer">
         <p>All resources are open source and available on GitHub. Last updated: October 2026</p>
         <p>GitHub: <a href="https://github.com/Jazblue" target="_blank">@Jazblue</a></p>
     </div>
+    
+    <!-- Visitor Counter -->
+    <script>
+        // Simple visitor counter using a free API
+        async function updateVisitorCount() {
+            try {
+                // Use a simple free counter service
+                const response = await fetch('https://api.countapi.xyz/hit/jazblue-tech-resources/visits');
+                const data = await response.json();
+                document.getElementById('visit-count').textContent = data.value.toLocaleString();
+            } catch (error) {
+                document.getElementById('visit-count').textContent = 'N/A';
+                console.log('Counter unavailable:', error);
+            }
+        }
+        updateVisitorCount();
+    </script>
 </body>
 </html>
